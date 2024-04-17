@@ -1,6 +1,7 @@
 # Social-Network-API
 
-3. ## Description
+## Description
+The foll
 4. 
 5. Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
 6. 
