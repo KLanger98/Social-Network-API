@@ -1,7 +1,8 @@
 # Social-Network-API
 
 ## Description
-The foll
+The following project has been completed as a part of the Adelaide University Web Development Bootcamp. By creating this project I have been able to familiarise myself with MongoDB and Mongoose. To do this I have created a 'Social Network API' which allows for the Creation of Users and Thoughts and their associated reactions and list of friends. 
+
 4. 
 5. Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
 6. 
@@ -19,7 +20,9 @@ The foll
 18. - [Credits](#credits)
 19. - [License](#license)
 20. 
-21. ## Installation
+## Installation
+If you would like to install this project on your local
+
 22. 
 23. What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
 24. 

@@ -32,6 +32,14 @@ module.exports ={
     }
   },
   //Update existing thought
+  async updateThought(req, res) {
+    try{
+      const thought = await Thought.findOneAndUpdate({_id: req.params.thoughtId}, {thoughtText: req.body.thoughtText})
+      res.json(thought)
+    } catch(err){
+      res.status(500).json(err)
+    }
+  },
 
   //Delete a thought
   async deleteThought(req, res) {

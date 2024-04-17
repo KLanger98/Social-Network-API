@@ -32,6 +32,24 @@ module.exports ={
       res.status(500).json(err);
     }
   },
+  //Update a username
+  async updateUser(req, res){
+    try{
+      const user = await User.findOneAndUpdate({_id: req.params.userId}, {username: req.body.username});
+      res.json(user);
+    } catch(err){
+      res.status(500).json(err);
+    }
+  },
+  //Delete a user
+  async deleteUser (req,res) {
+    try{
+      const user = await User.findOneAndDelete({_id: req.params.userId});
+      res.json(user);
+    } catch(err){
+      res.status(500).json(err);
+    }
+  },
   async addFriend(req, res) {
     try {
       let userId = req.params.userid;
