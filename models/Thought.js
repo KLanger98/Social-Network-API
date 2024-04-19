@@ -1,24 +1,6 @@
 const { Schema, model, mongoose } = require('mongoose');
 
-const reactionSchema = new mongoose.Schema({
-    reactionId: {
-        type: Schema.Types.ObjectId,
-        default: mongoose.Types.ObjectId
-    },
-    reactionBody: {
-        type: String,
-        maxlength: 280,
-
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    }
-})
+const Reaction = require('./Reaction')
 
 const thoughtSchema = new mongoose.Schema(
     {
@@ -38,10 +20,35 @@ const thoughtSchema = new mongoose.Schema(
             required: true 
 
         },
-        reactions: [reactionSchema]
+        reactions: [Reaction]
+    },
+    {
+        toJSON: {
+            virtuals: true
+        },
+        id: false
     }
 )
 
-const Thought = mongoose.model('Thought', thoughtSchema);
+thoughtSchema
+    .virtual('reactionCount')
+    .get(function(){
+        return this.reactions.length;
+    })
+
+thoughtSchema
+    .virtual('formattedDate')
+    .get(function(){
+        const year = this.createdAt.getFullYear();
+        const month = String(this.createdAt.getMonth() + 1).padStart(2, '0'); // Adding 1 to month since it's zero-based
+        const day = String(this.createdAt.getDate()).padStart(2, '0');
+        const hours = String(this.createdAt.getHours()).padStart(2, '0');
+        const minutes = String(this.createdAt.getMinutes()).padStart(2, '0');
+        const seconds = String(this.createdAt.getSeconds()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+    })
+
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought

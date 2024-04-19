@@ -14,11 +14,33 @@ const userSchema = mongoose.Schema(
             unique: true,
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
         },
-        thoughts: [],
-        friends: []
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'thought'
+            }
+        ],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'user'
+            }
+        ]
+    },
+    {
+        toJSON: {
+            virtuals: true
+        },
+        id: false
     }
 )
 
-const User = mongoose.model('User', userSchema);
+userSchema
+    .virtual('friendCount')
+    .get(function(){
+        return this.friends.length;
+    })
 
-module.exports = User
+const User = model('user', userSchema);
+
+module.exports = User;
